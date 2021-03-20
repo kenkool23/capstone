@@ -6,8 +6,16 @@ pipeline {
       port = 8082
   }
 
+
   
   stages {
+              
+    stage('Git') {
+      steps {
+        git 'https://github.com/kenkool23/capstone/tree/main/external-micro'
+        sh 'cloning git repo'
+      }
+    }
      
     stage("Setting up npm"){
         steps {
@@ -26,15 +34,6 @@ pipeline {
         }
     }
 
-    stage("Setting env variables"){
-        steps{
-                echo 'Retrieving source from github' 
-                git branch: 'main',
-                url: 'https://github.com/kenkool23/capstone/tree/main/external-micro'
-                echo 'Did we get the source?' 
-                sh 'ls -a'
-            }
-          }
     
 
     stage("Build Docker image"){
