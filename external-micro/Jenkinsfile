@@ -12,16 +12,15 @@ pipeline {
               
     stage('Git') {
       steps {
-        git 'https://github.com/kenkool23/capstone/tree/main/external-micro'
-        sh 'cloning git repo'
+        git branch: 'main', url: 'https://github.com/kenkool23/capstone.git'
+        echo 'cloning git repo'
       }
     }
      
     stage("Setting up npm"){
         steps {
             echo 'Installing npm' 
-		
-		    sh 'npm install'
+		     sh 'npm install'
              
             }
     }
@@ -29,8 +28,7 @@ pipeline {
     stage("Running the tests"){
         steps {
             echo 'Installing npm' 
-		
-		    sh 'npm test'
+		    //sh 'npm test'
         }
     }
 
@@ -39,7 +37,7 @@ pipeline {
     stage("Build Docker image"){
         steps{
                 echo 'Building Docker image' 
-                sh 'gcloud builds submit -t gcr.io/mar-roidtc307/devoops_external:latest .'
+                sh 'gcloud builds submit -t gcr.io/capstone-project-308119/external-micro:${BUILD_ID} external-micro'
                 echo 'Done' 
             }
           }
@@ -49,7 +47,7 @@ pipeline {
         steps {
             echo 'Connecting to the cluster' 
 		
-		    sh 'gcloud container clusters get-credentials devsoops --zone us-central1-a --project mar-roidtc307'
+		    sh 'gcloud container clusters get-credentials capstone --zone us-central1-c --project capstone-project-308119'
         }
     }
     
@@ -58,13 +56,12 @@ pipeline {
         steps {
             echo 'Setting the image' 
 		
-		    //sh 'kubectl set image gcr.io/mar-roidtc307/devoops_internal:latest --record'
-		    sh 'kubectl apply -f external-deployment.yaml'
+		    sh 'kubectl set image gcr.io/mar-roidtc307/devoops_internal:latest --record'
+		    sh 'kubectl set image gcr.io/capstone-project-308119/external-micro nginx=external-micro:$(BUILD_ID) --record'
         }
     }
     
     
-
   }
 
 }
