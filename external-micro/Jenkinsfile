@@ -22,7 +22,7 @@ pipeline {
         steps {
             echo 'Installing npm' 
 		
-		    sh 'npm test'
+		    sh 'npm test/test-server.js'
         }
     }
 
