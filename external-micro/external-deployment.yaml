@@ -16,7 +16,7 @@ spec:
         app: events-external
     spec:
       containers:
-      - image: gcr.io/mar-roidtc307/devoops_external:latest
+      - image: kenkool23/external-events:v1
         name: events-external
         imagePullPolicy: "Always"
         env:
