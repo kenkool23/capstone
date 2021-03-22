@@ -16,7 +16,7 @@ spec:
         app: events-internal
     spec:
       containers:
-      - image: gcr.io/mar-roidtc307/devoops_internal:latest
+      - image: kenkool23/internal-event:v1
         name: events-internal
         imagePullPolicy: "Always"
         resources:
