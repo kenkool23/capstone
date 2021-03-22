@@ -1,4 +1,4 @@
-FROM launcher.gcr.io/google/nodejs
+FROM node:alpine
 COPY . /app/
 WORKDIR /app
 RUN npm install
