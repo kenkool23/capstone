@@ -7,7 +7,7 @@ describe('GET /', function () {
   it('responds with home page', function (done) {
 
     //specify the url to be intercepted
-    nock("http://localhost:8082")
+    nock("http://localhost:8080")
       //define the method to be intercepted
       .get('/events')
       //respond with a OK and the specified JSON response
