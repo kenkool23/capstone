@@ -26,7 +26,13 @@ pipeline {
              
             }
     }
-    
+    stage("Running the tests"){
+        steps {
+            echo 'Installing npm' 
+            sh 'npm install'
+		    sh 'npm test'
+        }
+    }
     stage ('SonarQube Analysis') {
     
         steps {
