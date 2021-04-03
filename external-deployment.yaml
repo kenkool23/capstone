@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   labels:
     app: events-external
-  name: events-external
+  name: events-external-deployment
+  namespace: my-namespace  
 spec:
   replicas: 3
   selector:
