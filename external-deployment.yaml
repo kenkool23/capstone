@@ -2,19 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    App: events-external
-  name: events-external-deployment
-  namespace: capstone-namespace
+    app: events-external
+  name: events-external
 spec:
   replicas: 3
   selector:
     matchLabels:
-      App: events-external
+      app: events-external
   strategy: {}
   template:
     metadata:
       labels:
-        App: events-external
+        app: events-external
     spec:
       containers:
       - image: kenkool23/external-events:latest
